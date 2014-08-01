@@ -10,6 +10,10 @@ namespace dagoberto
 template<class T>
 class Value : virtual public Node<T> {
 public:
+	Value() : Node<T>()
+	{
+	}
+	
 	Value(Graph * graph, T const & value) :
 		Node<T>(graph), _value(value)
 	{
@@ -23,8 +27,10 @@ public:
 	
 	void operator=(T value)
 	{
-		_value = value;
-		NodeBase::setDirty();
+		if(value != value) {
+			_value = value;
+			NodeBase::setDirty();
+		}
 	}
 private:
 	T _value;

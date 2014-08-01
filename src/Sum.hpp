@@ -13,6 +13,10 @@ template<class T>
 class Sum : virtual public Node<T>
 {
 public:
+	Sum() : Node<T>()
+	{
+	}
+	
 	Sum(Graph * graph, Node<T> * left, Node<T> * right):
 		Node<T>(graph, {left, right}), _left(left), _right(right)
 	{
@@ -36,6 +40,10 @@ template<class T>
 class VectorSum : virtual public Node<T>
 {
 public:
+	VectorSum() : Node<T>()
+	{
+	}
+	
 	VectorSum(Graph * graph, std::vector<Node<T> *> const & terms):
 		Node<T>(graph)
 	{

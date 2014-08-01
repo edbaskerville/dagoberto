@@ -11,6 +11,11 @@ template<class T>
 class Function : virtual public Node<T>
 {
 public:
+	Function():
+		Node<T>()
+	{
+	}
+	
 	Function(Graph * graph, std::vector<NodeBase *> const & dependencies, std::function<T()> func):
 		Node<T>(graph, dependencies),
 		_func(func)

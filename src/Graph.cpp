@@ -18,6 +18,12 @@ std::unordered_set<NodeBase *> & Graph::edges(NodeBase * node)
 	return _edges[node];
 }
 
+NodeBase::NodeBase():
+	_graph(NULL),
+	_dirty(false)
+{
+}
+
 NodeBase::NodeBase(Graph * graph):
 	_graph(graph),
 	_dirty(true)

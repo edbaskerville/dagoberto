@@ -22,6 +22,7 @@ private:
 
 class NodeBase {
 public:
+	NodeBase();
 	NodeBase(Graph * graph);
 	NodeBase(Graph * graph, std::vector<NodeBase *> const & dependencies);
 	bool isDirty();
@@ -37,6 +38,10 @@ template<class T>
 class Node : public NodeBase
 {
 public:
+	Node() : NodeBase()
+	{
+	}
+	
 	Node(Graph * graph):
 		NodeBase(graph)
 	{
