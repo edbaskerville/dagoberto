@@ -1,5 +1,4 @@
 #include "Graph.hpp"
-#include <iostream>
 
 using namespace std;
 
@@ -11,7 +10,6 @@ Graph::Graph()
 
 void Graph::addEdge(NodeBase * from, NodeBase * to)
 {
-	cerr << "adding edge from " << from << " to " << to << endl;
 	_edges[from].insert(to);
 }
 
@@ -42,11 +40,9 @@ bool NodeBase::isDirty()
 
 void NodeBase::setDirty()
 {
-	cerr << "setting dirty " << this << endl;
 	if(!_dirty) {
 		_dirty = true;
 		for(auto nodePtr : _graph->edges(this)) {
-			cerr << "making parent " << nodePtr << " dirty" << endl;
 			nodePtr->setDirty();
 		}
 	}
@@ -54,7 +50,6 @@ void NodeBase::setDirty()
 
 void NodeBase::setClean()
 {
-	cerr << "setting " << this << " clean" << endl;
 	_dirty = false;
 }
 

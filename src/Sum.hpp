@@ -62,8 +62,6 @@ private:
 	
 	Sum<T> * makeSum(Graph * graph, std::vector<Node<T> *> const & terms, size_t lower, size_t upper)
 	{
-		std::cerr << "making sum" << std::endl;
-		
 		size_t size = upper - lower;
 		
 		size_t nLeft = size / 2;
@@ -75,21 +73,17 @@ private:
 		
 		Node<T> * leftNode;
 		if(nLeft == 1) {
-			std::cerr << "nLeft == 1" << std::endl;
 			leftNode = terms[lower];
 		}
 		else {
-			std::cerr << "nLeft > 1" << std::endl;
 			leftNode = makeSum(graph, terms, lower, rightLower);
 		}
 		
 		Node<T> * rightNode;
 		if(nRight == 1) {
-			std::cerr << "nRight == 1" << std::endl;
 			rightNode = terms[rightLower];
 		}
 		else {
-			std::cerr << "nRight > 1" << std::endl;
 			rightNode = makeSum(graph, terms, rightLower, upper);
 		}
 		
