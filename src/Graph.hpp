@@ -70,7 +70,7 @@ protected:
 	virtual void commit() = 0;
 private:
 	Graph * const _graph;
-	bool const _isLeaf;
+	bool _isLeaf;
 };
 
 template<class T>
