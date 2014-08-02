@@ -69,7 +69,7 @@ protected:
 	virtual void rollback() = 0;
 	virtual void commit() = 0;
 private:
-	Graph * const _graph;
+	Graph * _graph;
 	bool _isLeaf;
 };
 
