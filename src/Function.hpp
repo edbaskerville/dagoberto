@@ -8,31 +8,26 @@ namespace dagoberto
 {
 
 template<class T>
-class Function : virtual public Node<T>
+class Function : public InnerNode<T>
 {
 public:
 	Function():
-		Node<T>()
+		InnerNode<T>()
 	{
 	}
 	
 	Function(Graph * graph, std::vector<NodeBase *> const & dependencies, std::function<T()> func):
-		Node<T>(graph, dependencies),
+		InnerNode<T>(graph, dependencies),
 		_func(func)
 	{
 	}
 	
-	virtual T operator()()
+	virtual T calculate()
 	{
-		if(NodeBase::isDirty()) {
-			_value = _func();
-			NodeBase::setClean();
-		}
-		return _value;
+		return _func();
 	}
 private:
 	std::function<T()> _func;
-	T _value;
 };
 
 } // namespace dagoberto

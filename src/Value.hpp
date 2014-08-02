@@ -8,32 +8,26 @@ namespace dagoberto
 {
 
 template<class T>
-class Value : virtual public Node<T> {
+class Value : public LeafNode<T> {
 public:
-	Value() : Node<T>()
+	Value() : LeafNode<T>()
 	{
 	}
 	
 	Value(Graph * graph, T const & value) :
-		Node<T>(graph), _value(value)
+		LeafNode<T>(graph, value)
 	{
 	}
 	
-	virtual T operator()()
+	virtual T const & evaluate()
 	{
-		NodeBase::setClean();
-		return _value;
+		return Node<T>::value();
 	}
 	
-	void operator=(T value)
+	virtual void operator=(T value)
 	{
-		if(value != value) {
-			_value = value;
-			NodeBase::setDirty();
-		}
+		Node<T>::setValue(value);
 	}
-private:
-	T _value;
 };
 
 } // namespace dagoberto

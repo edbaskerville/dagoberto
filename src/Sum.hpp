@@ -10,42 +10,37 @@ namespace dagoberto
 {
 
 template<class T>
-class Sum : virtual public Node<T>
+class Sum : public InnerNode<T>
 {
 public:
-	Sum() : Node<T>()
+	Sum() : InnerNode<T>()
 	{
 	}
 	
 	Sum(Graph * graph, Node<T> * left, Node<T> * right):
-		Node<T>(graph, {left, right}), _left(left), _right(right)
+		InnerNode<T>(graph, {left, right}), _left(left), _right(right)
 	{
 	}
 	
-	virtual T operator()()
+	virtual T calculate()
 	{
-		if(NodeBase::isDirty()) {
-			_value = (*_left)() + (*_right)();
-			NodeBase::setClean();
-		}
-		return _value;
+		return _left->evaluate() + _right->evaluate();
 	}
 private:
-	T _value;
 	Node<T> * _left;
 	Node<T> * _right;
 };
 
 template<class T>
-class VectorSum : virtual public Node<T>
+class VectorSum : public InnerNode<T>
 {
 public:
-	VectorSum() : Node<T>()
+	VectorSum() : InnerNode<T>()
 	{
 	}
 	
 	VectorSum(Graph * graph, std::vector<Node<T> *> const & terms):
-		Node<T>(graph)
+		InnerNode<T>(graph)
 	{
 		if(terms.size() < 2) {
 			throw std::runtime_error("VectorSum requires at least two terms.");
@@ -55,16 +50,11 @@ public:
 		graph->addEdge(root, this);
 	}
 	
-	virtual T operator()()
+	virtual T calculate()
 	{
-		if(NodeBase::isDirty()) {
-			_value = (*root)();
-			NodeBase::setClean();
-		}
-		return _value;
+		return root->evaluate();
 	}
 private:
-	T _value;
 	Sum<T> * root;
 	std::vector<std::unique_ptr<Sum<T>>> _sums;
 	

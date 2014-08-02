@@ -10,6 +10,8 @@ TEST_CASE("example", "[dagoberto]")
 	
 	Graph g;
 	
+	g.beginInitialization();
+	
 	Value<int64_t> N(&g, 2);
 	Value<double> A(&g, 5.0);
 	Value<double> B(&g, 4.0);
@@ -32,43 +34,71 @@ TEST_CASE("example", "[dagoberto]")
 	Value<double> G(&g, 35);
 	VectorSum<double> H(&g, {&E, &F, &G});
 	
-	double Hval = H();
-	REQUIRE(Hval > 151.5 - tol);
-	REQUIRE(Hval < 151.5 + tol);
+	g.endInitialization(&H);
 	
+	REQUIRE(H() > 151.5 - tol);
+	REQUIRE(H() < 151.5 + tol);
+	
+	g.beginTransaction();
 	N = 5;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 5191.5 - tol);
-	REQUIRE(Hval < 5191.5 + tol);
+	REQUIRE(H() > 5191.5 - tol);
+	REQUIRE(H() < 5191.5 + tol);
 	
+	REQUIRE(H() > 5191.5 - tol);
+	REQUIRE(H() < 5191.5 + tol);
+	
+	
+	g.beginTransaction();
 	A = 1.0;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 1095.5 - tol);
-	REQUIRE(Hval < 1095.5 + tol);
+	REQUIRE(H() > 1095.5 - tol);
+	REQUIRE(H() < 1095.5 + tol);
 	
+	g.beginTransaction();
 	B = 2.0;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 103.5 - tol);
-	REQUIRE(Hval < 103.5 + tol);
+	REQUIRE(H() > 103.5 - tol);
+	REQUIRE(H() < 103.5 + tol);
 	
+	g.beginTransaction();
 	D = 12345.0;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 12445 - tol);
-	REQUIRE(Hval < 12445 + tol);
+	REQUIRE(H() > 12445 - tol);
+	REQUIRE(H() < 12445 + tol);
 	
+	g.beginTransaction();
 	F = 23;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 12435 - tol);
-	REQUIRE(Hval < 12435 + tol);
+	REQUIRE(H() > 12435 - tol);
+	REQUIRE(H() < 12435 + tol);
 	
+	g.beginTransaction();
 	G = 25;
+	g.endTransaction();
+	g.commit();
 	
-	Hval = H();
-	REQUIRE(Hval > 12425 - tol);
-	REQUIRE(Hval < 12425 + tol);
+	REQUIRE(H() > 12425 - tol);
+	REQUIRE(H() < 12425 + tol);
+	
+	g.beginTransaction();
+	G = 45;
+	D = 10;
+	g.endTransaction();
+	REQUIRE(H() > 110 - tol);
+	REQUIRE(H() < 110 + tol);
+	g.rollback();
+	
+	REQUIRE(H() > 12425 - tol);
+	REQUIRE(H() < 12425 + tol);
 }
