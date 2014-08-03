@@ -105,6 +105,7 @@ void Graph::rollback()
 	for(NodeBase * nodePtr : _dirtyNodes) {
 		nodePtr->rollback();
 	}
+	_dirtyNodes.clear();
 	_state = GraphState::READY;
 }
 

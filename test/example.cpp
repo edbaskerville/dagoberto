@@ -101,4 +101,12 @@ TEST_CASE("example", "[dagoberto]")
 	
 	REQUIRE(H() > 12425 - tol);
 	REQUIRE(H() < 12425 + tol);
+	
+	g.beginTransaction();
+	G = 45;
+	D = 10;
+	g.endTransaction();
+	g.commit();
+	REQUIRE(H() > 110 - tol);
+	REQUIRE(H() < 110 + tol);
 }
