@@ -36,6 +36,8 @@ public:
 	void endTransaction();
 	void commit();
 	void rollback();
+	
+	void recalculateAll();
 private:
 	GraphState _state;
 	

@@ -124,6 +124,20 @@ void Graph::setDirty(NodeBase * nodePtr)
 	}
 }
 
+void Graph::recalculateAll()
+{
+	if(_state != GraphState::READY) {
+		throw runtime_error("recalculateAll can only happen when ready");
+	}
+	
+	beginTransaction();
+	for(NodeBase * node : _nodes) {
+		setDirty(node);
+	}
+	endTransaction();
+	commit();
+}
+
 bool Graph::isVisited(NodeBase * nodePtr)
 {
 	assert(_state == GraphState::RECALCULATING);
