@@ -109,6 +109,19 @@ void Graph::rollback()
 	_state = GraphState::READY;
 }
 
+void Graph::recalculateAll()
+{
+	if(_state != GraphState::READY) {
+		throw runtime_error("full recalculation can only happen when ready");
+	}
+	beginTransaction();
+	for(NodeBase * nodePtr : _nodes) {
+		setDirty(nodePtr);
+	}
+	endTransaction();
+	commit();
+}
+
 bool Graph::isDirty(NodeBase * node)
 {
 	return _dirtyNodes.find(node) != _dirtyNodes.end();
@@ -122,20 +135,6 @@ void Graph::setDirty(NodeBase * nodePtr)
 			setDirty(depPtr);
 		}
 	}
-}
-
-void Graph::recalculateAll()
-{
-	if(_state != GraphState::READY) {
-		throw runtime_error("recalculateAll can only happen when ready");
-	}
-	
-	beginTransaction();
-	for(NodeBase * node : _nodes) {
-		setDirty(node);
-	}
-	endTransaction();
-	commit();
 }
 
 bool Graph::isVisited(NodeBase * nodePtr)

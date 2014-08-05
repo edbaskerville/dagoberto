@@ -136,13 +136,12 @@ private:
 	
 	virtual void rollback()
 	{
-		_newValue = T();
+		_newValue = _value;
 	}
 	
 	virtual void commit()
 	{
 		_value = _newValue;
-		_newValue = T();
 	}
 };
 
