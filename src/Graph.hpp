@@ -89,7 +89,7 @@ public:
 	}
 	
 	Node(bool isLeaf, Graph * graph, T const & value):
-		NodeBase(isLeaf, graph), _value(value)
+		NodeBase(isLeaf, graph), _value(value), _newValue(value)
 	{
 	}
 	
