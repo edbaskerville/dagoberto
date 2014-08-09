@@ -125,6 +125,7 @@ protected:
 			case GraphState::UNCOMMITTED:
 				return isDirty() ? _newValue : _value;
 			case GraphState::READY:
+			case GraphState::IN_TRANSACTION:
 				return _value;
 			default:
 				throw std::runtime_error("Error: attempt to get value in wrong state.");
@@ -174,6 +175,7 @@ public:
 				break;
 			case GraphState::UNCOMMITTED:
 			case GraphState::READY:
+			case GraphState::IN_TRANSACTION:
 				break;
 			default:
 				throw std::runtime_error("Cannot evaluate in this state");
