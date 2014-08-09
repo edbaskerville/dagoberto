@@ -4,7 +4,7 @@
 #include <cassert>
 #include <iostream>
 #include "Graph.hpp"
-
+#include <memory>
 
 namespace dagoberto
 {
