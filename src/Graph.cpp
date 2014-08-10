@@ -57,7 +57,7 @@ void Graph::endInitialization(NodeBase * root)
 		}
 	}
 	_root = root;
-	_state = GraphState::RECALCULATING;
+	_state = GraphState::RECALCULATING_INITIAL;
 	_root->recalculate();
 	_visitedNodes.clear();
 	_state = GraphState::UNCOMMITTED;
@@ -139,7 +139,7 @@ void Graph::setDirty(NodeBase * nodePtr)
 
 bool Graph::isVisited(NodeBase * nodePtr)
 {
-	assert(_state == GraphState::RECALCULATING);
+	assert(_state == GraphState::RECALCULATING || _state == GraphState::RECALCULATING_INITIAL);
 	return _visitedNodes.find(nodePtr) != _visitedNodes.end();
 }
 

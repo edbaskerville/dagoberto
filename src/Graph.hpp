@@ -16,6 +16,7 @@ enum class GraphState
 {
 	UNINITIALIZED,
 	INITIALIZING,
+	RECALCULATING_INITIAL,
 	READY,
 	IN_TRANSACTION,
 	RECALCULATING,
@@ -112,7 +113,7 @@ public:
 	
 	virtual void setValue(T const & newValue)
 	{
-		if(_value != newValue) {
+		if(graphState() == GraphState::RECALCULATING_INITIAL || _value != newValue) {
 			_newValue = newValue;
 			setDirty();
 		}
@@ -121,6 +122,8 @@ protected:
 	virtual T const & value()
 	{
 		switch(graphState()) {
+			case GraphState::RECALCULATING_INITIAL:
+				return _newValue;
 			case GraphState::RECALCULATING:
 			case GraphState::UNCOMMITTED:
 				return isDirty() ? _newValue : _value;
@@ -168,6 +171,11 @@ public:
 	virtual T const & evaluate()
 	{
 		switch(NodeBase::graphState()) {
+			case GraphState::RECALCULATING_INITIAL:
+				if(!NodeBase::isVisited()) {
+					Node<T>::setValue(calculate());
+				}
+				break;
 			case GraphState::RECALCULATING:
 				if(NodeBase::isDirty() && !NodeBase::isVisited()) {
 					Node<T>::setValue(calculate());
@@ -188,6 +196,7 @@ public:
 	virtual void setValue(T const & newValue)
 	{
 		switch(Node<T>::graphState()) {
+			case GraphState::RECALCULATING_INITIAL:
 			case GraphState::RECALCULATING:
 				Node<T>::setValue(newValue);
 				break;

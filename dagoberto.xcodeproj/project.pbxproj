@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69AAD3D8199808B0006C2C0C /* MatrixMultiplexerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69AAD3D7199808B0006C2C0C /* MatrixMultiplexerTest.cpp */; };
 		69D4D95A1989E54900258F05 /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69D4D9591989E54900258F05 /* test_main.cpp */; };
 		69D4D9611989E5AA00258F05 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69D4D95F1989E5AA00258F05 /* Graph.cpp */; };
-		69D4D9691989E82500258F05 /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69D4D9671989E82500258F05 /* example.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		69AAD3D61998038B006C2C0C /* MatrixMultiplexer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MatrixMultiplexer.hpp; sourceTree = "<group>"; };
+		69AAD3D7199808B0006C2C0C /* MatrixMultiplexerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixMultiplexerTest.cpp; sourceTree = "<group>"; };
 		69D4D9591989E54900258F05 /* test_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_main.cpp; sourceTree = "<group>"; };
 		69D4D95B1989E55800258F05 /* catch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = catch.hpp; path = Catch/single_include/catch.hpp; sourceTree = "<group>"; };
 		69D4D95F1989E5AA00258F05 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
@@ -33,7 +35,7 @@
 		69D4D9631989E6FA00258F05 /* Value.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Value.hpp; sourceTree = "<group>"; };
 		69D4D9651989E74000258F05 /* Function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Function.hpp; sourceTree = "<group>"; };
 		69D4D9671989E82500258F05 /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
-		69D4F9521989C9D20016E199 /* dagoberto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dagoberto; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D4F9521989C9D20016E199 /* dagoberto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = dagoberto; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FECBBC1989CA07001F5F93 /* dagoberto.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dagoberto.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 				69D4D95B1989E55800258F05 /* catch.hpp */,
 				69D4D9591989E54900258F05 /* test_main.cpp */,
 				69D4D9671989E82500258F05 /* example.cpp */,
+				69AAD3D7199808B0006C2C0C /* MatrixMultiplexerTest.cpp */,
 			);
 			path = test;
 			sourceTree = SOURCE_ROOT;
@@ -84,6 +87,7 @@
 				69D4D9631989E6FA00258F05 /* Value.hpp */,
 				69D4D9651989E74000258F05 /* Function.hpp */,
 				69D4D9621989E69900258F05 /* Sum.hpp */,
+				69AAD3D61998038B006C2C0C /* MatrixMultiplexer.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -140,8 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				69D4D95A1989E54900258F05 /* test_main.cpp in Sources */,
+				69AAD3D8199808B0006C2C0C /* MatrixMultiplexerTest.cpp in Sources */,
 				69D4D9611989E5AA00258F05 /* Graph.cpp in Sources */,
-				69D4D9691989E82500258F05 /* example.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +184,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"~/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -213,6 +222,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"~/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 			};
