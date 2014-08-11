@@ -50,6 +50,7 @@ private:
 	std::unordered_set<NodeBase *> _visitedNodes;
 	
 	void setDirty(NodeBase * nodePtr);
+	void setVisited(NodeBase * nodePtr);
 	bool isDirty(NodeBase * nodePtr);
 	bool isVisited(NodeBase * nodePtr);
 };
@@ -68,6 +69,7 @@ protected:
 	bool isDirty();
 	void setDirty();
 	bool isVisited();
+	void setVisited();
 	
 	virtual void rollback() = 0;
 	virtual void commit() = 0;
@@ -199,6 +201,7 @@ public:
 			case GraphState::RECALCULATING_INITIAL:
 			case GraphState::RECALCULATING:
 				Node<T>::setValue(newValue);
+				Node<T>::setVisited();
 				break;
 			default:
 				throw std::runtime_error("Error: attempt to set value in wrong state.");

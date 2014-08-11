@@ -137,6 +137,13 @@ void Graph::setDirty(NodeBase * nodePtr)
 	}
 }
 
+void Graph::setVisited(NodeBase * nodePtr)
+{
+	if(_visitedNodes.find(nodePtr) == _visitedNodes.end()) {
+		_visitedNodes.insert(nodePtr);
+	}
+}
+
 bool Graph::isVisited(NodeBase * nodePtr)
 {
 	assert(_state == GraphState::RECALCULATING || _state == GraphState::RECALCULATING_INITIAL);
@@ -203,6 +210,14 @@ bool NodeBase::isVisited()
 		throw runtime_error("Graph is null");
 	}
 	return _graph->isVisited(this);
+}
+
+void NodeBase::setVisited()
+{
+	if(_graph == nullptr) {
+		throw runtime_error("Graph is null");
+	}
+	_graph->setVisited(this);
 }
 
 } // namespace dagoberto
